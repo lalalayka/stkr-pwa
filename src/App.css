@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: var(--color-bg-app);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: var(--opacity-empty-state);
+}
+
+.image-list {
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--aspect-ratio);
+  background: var(--color-bg-canvas);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--image-gap);
+}
+
+.footer {
+  padding: var(--spacing-sm);
+  padding-bottom: var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin: 0 auto;
+}
+
+.button {
+  flex: 1;
+  /* padding: var(--spacing-xs) var(--spacing-sm); */
+  border: none;
+  border-radius: var(--border-radius-pill);
+  cursor: pointer;
+  transition: all 0.2s;
+  height: var(--button-height);
+  width: var(--button-width);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;  
+  gap: var(--spacing-xs);  
+  text-decoration: none;
+  background: var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-text);
+}
+
+.button:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+.button:active {
+  opacity: var(--opacity-active);
+}

@@ -1,11 +1,11 @@
 # iOS App Developer Brief
 
 Project: Vertical Image Composer for Social Media
-Platform: iOS
+Platform: PWA
 Target: iPhone (portrait only)
 
 ## App Goal (Single Primary Job)
-Enable users to select up to 4 images, arrange them vertically, and export a single 1080×1920 HEIC image suitable for social media sharing.
+Enable users to select up to 4 images, arrange them vertically, and export a single 2160×3840 jpg image suitable for social media sharing.
 
 ## Core User Flow
 1. User launches app
@@ -17,7 +17,7 @@ Enable users to select up to 4 images, arrange them vertically, and export a sin
 4.3 Remove a single image
 4.4 Remove all images and start over
 5. User taps Export
-6. App generates a 1080×1920 HEIC image
+6. App generates a 2160×3840 jpg image
 7. System Share Sheet is presented
 
 
@@ -42,10 +42,10 @@ Enable users to select up to 4 images, arrange them vertically, and export a sin
 - Order updates immediately and persists until export/reset
 
 ### Output Specifications
-- Resolution: 1080 × 1920 pixels
+- Resolution: 2160×3840 pixels
 - Orientation: Portrait
-- Format: HEIC
-- Color space: Default iOS
+- Format: jpg
+- Color space: RGB
 
 ### Sharing
 - After export, present iOS system Share Sheet
@@ -69,7 +69,8 @@ Enable users to select up to 4 images, arrange them vertically, and export a sin
   - ([Figma with design](https://www.figma.com/design/AxeCnUvKalTtzK2mm27KHq/stkr?node-id=15-909&t=njRpBeBnM4GuRcLE-11))
 
 ### Technical Notes (Non-Prescriptive)
-- Swift + SwiftUI recommended
-- Native drag-and-drop APIs preferred
-- Use native image rendering pipeline for HEIC export
+- [dnd kit](https://dndkit.com/) for drag'n'drop
+- [dnd documentation](https://docs.dndkit.com/)
+- [dnd sortable](https://docs.dndkit.com/presets/sortable#sortable-context)
+- Choose best image rendering pipeline for jpg export
 - Performance optimized for up to 4 high-resolution photos

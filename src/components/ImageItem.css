@@ -1,0 +1,88 @@
+.image-item {
+    position: relative;
+}
+
+.image-item.dragging {
+    opacity: var(--opacity-dragging);
+}
+
+.image-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    user-select: none;
+}
+
+.image-item-drag-handle {
+    height: var(--grab-height);
+    width: var(--grab-width);
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: var(--z-index-drag-handle);
+    touch-action: none;
+    background: var(--color-drag-handle-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-drag-handle-text);
+    transition: all 0.2s;
+}
+
+.image-item-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-overlay-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-overlay);
+    cursor: pointer;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.image-item-remove-button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--color-btn-primary-text);
+    background: none;
+    border: none;
+    border-radius: var(--border-radius-pill);
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    pointer-events: auto;
+    transition: all 0.2s;
+}
+
+.image-item-remove-button:active {
+    opacity: var(--opacity-active);
+}
+
+.image-item-remove-button .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--button-height);
+    width: var(--button-width);
+    background: var(--color-btn-remove-bg);
+    color: var(--color-btn-remove-text);
+    border: none;
+    border-radius: var(--border-radius-pill);
+}
