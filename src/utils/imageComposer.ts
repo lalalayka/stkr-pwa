@@ -1,5 +1,5 @@
 import type { ImageItem } from '../types';
-import { EXPORT_CONFIG, COLORS, DIMENSIONS } from '../constants/theme';
+import { EXPORT_CONFIG, COLORS } from '../constants/theme';
 
 export async function composeImages(images: ImageItem[]): Promise<Blob> {
   if (images.length === 0) {
