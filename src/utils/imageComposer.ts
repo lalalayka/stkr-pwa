@@ -24,7 +24,7 @@ export async function composeImages(images: ImageItem[]): Promise<Blob> {
     images.map(img => loadImage(img.preview))
   );
 
-  // Gap between images
+// Scale gap proportionally (base gap is for 360px preview, export is 2160px = 6x)
   const imageGap = EXPORT_CONFIG.imageGap * 6;
 
   // Calculate scaled dimensions for each image maintaining original aspect ratio

@@ -31,23 +31,28 @@ function App() {
     injectCSSVariables();
   }, []);
 
+  // Cleanup object URLs on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      images.forEach((img) => URL.revokeObjectURL(img.preview));
+    };
+  }, [images]);
+
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor)
   );
 
-  const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     const availableSlots = EXPORT_CONFIG.maxImages - images.length;
     const filesToAdd = files.slice(0, availableSlots);
 
-    const newImages: ImageItem[] = await Promise.all(
-      filesToAdd.map(async (file) => ({
-        id: `${Date.now()}-${Math.random()}`,
-        file,
-        preview: URL.createObjectURL(file),
-      }))
-    );
+    const newImages: ImageItem[] = filesToAdd.map((file) => ({
+      id: crypto.randomUUID(),
+      file,
+      preview: URL.createObjectURL(file),
+    }));
 
     setImages((prev) => [...prev, ...newImages]);
     e.target.value = '';
@@ -97,7 +102,6 @@ function App() {
       
       const file = new File([blob], filename, { type: 'image/jpeg' });
 
-      // Try Web Share API (temporarily disabled)
       if (navigator.share && navigator.canShare?.({ files: [file] })) {
         await navigator.share({
           files: [file],
@@ -158,7 +162,7 @@ function App() {
         <div className="button-group">
           {images.length < EXPORT_CONFIG.maxImages && (
             <>
-              <label className="button" htmlFor="image-input">
+              <label className="button" htmlFor="image-input" aria-label="Add images">
                 <PlusIcon size={24} />
               </label>
               <input
@@ -174,20 +178,19 @@ function App() {
           )}
 
           {images.length > 0 && (
-            <>
-            <div className='button-group'>
-              <button className="button" onClick={handleRemoveAll}>
+            <div className="button-group">
+              <button className="button" onClick={handleRemoveAll} aria-label="Remove all images">
                 <TrashIcon size={24} />
               </button>
               <button
                 className="button"
                 onClick={handleExport}
                 disabled={isExporting}
+                aria-label="Export image"
               >
                 <ExportIcon size={24} />
               </button>
-              </div>
-            </>
+            </div>
           )}
         </div>
       </footer>
