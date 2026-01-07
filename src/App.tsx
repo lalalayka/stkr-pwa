@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { PlusIcon, TrashIcon, ExportIcon, PanoramaIcon } from '@phosphor-icons/react';
+import { PlusIcon, TrashIcon, ExportIcon, PanoramaIcon, CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import {
   DndContext,
   closestCenter,
@@ -25,6 +25,8 @@ function App() {
   const [images, setImages] = useState<ImageItem[]>([]);
   const [isExporting, setIsExporting] = useState(false);
   const [activeOverlayId, setActiveOverlayId] = useState<string | null>(null);
+  const [showSuccessOverlay, setShowSuccessOverlay] = useState(false);
+  const [showFailOverlay, setShowFailOverlay] = useState(false);
 
   // Inject CSS variables on mount
   useEffect(() => {
@@ -116,9 +118,15 @@ function App() {
         a.click();
         URL.revokeObjectURL(url);
       }
+      
+      // Show success overlay
+      setShowSuccessOverlay(true);
+      setTimeout(() => setShowSuccessOverlay(false), 2000);
     } catch (error) {
       console.error('Export failed:', error);
-      alert('Failed to export image. Please try again.');
+      // Show fail overlay
+      setShowFailOverlay(true);
+      setTimeout(() => setShowFailOverlay(false), 2000);
     } finally {
       setIsExporting(false);
     }
@@ -194,6 +202,24 @@ function App() {
           )}
         </div>
       </footer>
+
+      {showSuccessOverlay && (
+        <div className="success-overlay">
+          <div className="success-content">
+            <CheckCircleIcon size={48} weight="fill" />
+            <p>Exported!</p>
+          </div>
+        </div>
+      )}
+
+      {showFailOverlay && (
+        <div className="fail-overlay">
+          <div className="fail-content">
+            <XCircleIcon size={48} weight="fill" />
+            <p>Export Failed</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

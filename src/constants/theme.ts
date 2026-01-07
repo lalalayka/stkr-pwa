@@ -8,6 +8,10 @@ export const COLORS = {
     text: {
         primary: 'hsl(0deg 0% 100%)',
     },
+    status: {
+        success: 'hsl(0deg 0% 100%)',
+        error: 'hsl(0deg 100% 50%)',
+    },
     button: {
         primary: {
             background: 'hsl(0deg 0% 100% / 10%)',
@@ -84,6 +88,10 @@ export function injectCSSVariables() {
     root.style.setProperty('--color-bg-app', COLORS.background.app);
     root.style.setProperty('--color-bg-canvas', COLORS.background.canvas);
     root.style.setProperty('--color-text-primary', COLORS.text.primary);
+
+    // Status Colors
+    root.style.setProperty('--color-status-success', COLORS.status.success);
+    root.style.setProperty('--color-status-error', COLORS.status.error);
 
     // Button Colors
     root.style.setProperty('--color-btn-primary-bg', COLORS.button.primary.background);
