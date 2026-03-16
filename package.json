@@ -17,7 +17,6 @@
     "@phosphor-icons/react": "^2.1.10",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "vite-plugin-pwa": "^0.19.8",
     "workbox-window": "^7.4.0"
   },
   "devDependencies": {
@@ -32,7 +31,8 @@
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vite-plugin-pwa": "^1.2.0"
   },
   "overrides": {
     "serialize-javascript": "^7.0.4"
