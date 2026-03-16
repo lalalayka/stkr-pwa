@@ -27,6 +27,7 @@ function App() {
   const [activeOverlayId, setActiveOverlayId] = useState<string | null>(null);
   const [showSuccessOverlay, setShowSuccessOverlay] = useState(false);
   const [showFailOverlay, setShowFailOverlay] = useState(false);
+  const [lastExportError, setLastExportError] = useState<string | null>(null);
 
   // Inject CSS variables on mount
   useEffect(() => {
@@ -124,6 +125,13 @@ function App() {
       setTimeout(() => setShowSuccessOverlay(false), 2000);
     } catch (error) {
       console.error('Export failed:', error);
+      const message =
+        error instanceof Error
+          ? error.message
+          : typeof error === 'string'
+            ? error
+            : JSON.stringify(error);
+      setLastExportError(message);
       // Show fail overlay
       setShowFailOverlay(true);
       setTimeout(() => setShowFailOverlay(false), 2000);
@@ -216,7 +224,12 @@ function App() {
         <div className="fail-overlay">
           <div className="fail-content">
             <XCircleIcon size={48} weight="fill" />
+            <div className="fail-content-text">
             <p>Export Failed</p>
+              {lastExportError && (
+                <p className="fail-caption">{lastExportError}</p>
+              )}
+            </div>
           </div>
         </div>
       )}
